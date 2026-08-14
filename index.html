@@ -62,7 +62,11 @@
   .btn:hover{border-color:var(--teal); text-decoration:none; background:rgba(69,217,200,.06);}
   .btn.primary{background:var(--amber); color:#141005; border-color:var(--amber); font-weight:600;}
   .btn.primary:hover{background:#ffc172;}
-
+  .profile-photo{
+  width:120px; height:120px; border-radius:50%;
+  object-fit:cover; border:2px solid var(--amber);
+  margin-bottom:24px;
+}
   section{padding:60px 0; border-top:1px solid var(--border);}
   .eyebrow{font-family:var(--font-mono); font-size:12px; color:var(--amber); letter-spacing:.12em; text-transform:uppercase; margin-bottom:10px;}
   h2{font-family:var(--font-display); font-size:clamp(1.4rem,3.2vw,1.9rem); font-weight:600;}
@@ -136,6 +140,7 @@
   <div class="wrap">
     <div class="status-line"><span class="dot"></span> LINK STATE: UP — OPEN TO NETWORK & INFRASTRUCTURE ENGINEER ROLES</div>
     <h1>Arun Sai Porandla<br><span class="accent">Network &amp; Infrastructure Specialist</span></h1>
+    <img src="profile.jpg" alt="Arun Sai Porandla" class="profile-photo">
     <div class="role">Cisco Switching/Routing/WLC · AWS &amp; Azure Cloud Ops · Firewall Admin (Sophos/FortiGate) · Microsoft 365</div>
     <p class="hero-desc">
       10+ years of hands-on enterprise IT experience — networking, cloud infrastructure, system administration,
