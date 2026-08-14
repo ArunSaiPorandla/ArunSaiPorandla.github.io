@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arun Sai Porandla — Network &amp; Infrastructure Specialist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0F1A;
+    --panel:#111A2C;
+    --panel-2:#0D1526;
+    --border:#22314A;
+    --text:#E7ECF5;
+    --text-muted:#8592AC;
+    --amber:#FFB454;
+    --teal:#45D9C8;
+    --font-display:'Space Grotesk',sans-serif;
+    --font-body:'IBM Plex Sans',sans-serif;
+    --font-mono:'IBM Plex Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:var(--font-body);line-height:1.6;overflow-x:hidden;}
+  a{color:var(--teal);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--teal); outline-offset:3px;}
+
+  .noise-bg{
+    position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.035;
+    background-image:radial-gradient(circle at 1px 1px, #ffffff 1px, transparent 0);
+    background-size:26px 26px;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px;position:relative;z-index:1;}
+
+  nav{position:sticky; top:0; z-index:10; backdrop-filter:blur(10px); background:rgba(10,15,26,0.82); border-bottom:1px solid var(--border);}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;}
+  .brand{font-family:var(--font-mono);font-size:13px;color:var(--amber);letter-spacing:.06em;}
+  .brand span{color:var(--text-muted);}
+  .navlinks{display:none;gap:20px;font-family:var(--font-mono);font-size:12.5px;}
+  .navlinks a{color:var(--text-muted);}
+  .navlinks a:hover{color:var(--teal);}
+  @media(min-width:680px){.navlinks{display:flex;}}
+
+  header.hero{padding:80px 0 56px;}
+  .status-line{
+    display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:12.5px;color:var(--teal);
+    border:1px solid var(--border); padding:6px 12px; border-radius:100px; margin-bottom:26px;
+  }
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--teal); animation:pulse 2.2s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(69,217,200,.55);}70%{box-shadow:0 0 0 8px rgba(69,217,200,0);}100%{box-shadow:0 0 0 0 rgba(69,217,200,0);}}
+  h1{font-family:var(--font-display);font-weight:700;font-size:clamp(2.1rem, 5.8vw, 3.4rem);line-height:1.06;letter-spacing:-0.01em;}
+  h1 .accent{color:var(--amber);}
+  .role{font-family:var(--font-mono); color:var(--text-muted); font-size:clamp(13px,2.2vw,16px); margin-top:14px;}
+  .hero-desc{max-width:64ch;color:var(--text-muted);margin-top:22px;font-size:15.5px;}
+  .hero-meta{display:flex; flex-wrap:wrap; gap:28px; margin-top:36px; font-family:var(--font-mono); font-size:12.5px; color:var(--text-muted);}
+  .hero-meta b{display:block;color:var(--text);font-family:var(--font-display);font-size:21px;font-weight:600;}
+  .hero-cta{display:flex; gap:14px; margin-top:36px; flex-wrap:wrap;}
+  .btn{font-family:var(--font-mono); font-size:13px; padding:11px 20px; border-radius:6px; border:1px solid var(--border); color:var(--text); transition:.15s border-color, .15s background;}
+  .btn:hover{border-color:var(--teal); text-decoration:none; background:rgba(69,217,200,.06);}
+  .btn.primary{background:var(--amber); color:#141005; border-color:var(--amber); font-weight:600;}
+  .btn.primary:hover{background:#ffc172;}
+
+  section{padding:60px 0; border-top:1px solid var(--border);}
+  .eyebrow{font-family:var(--font-mono); font-size:12px; color:var(--amber); letter-spacing:.12em; text-transform:uppercase; margin-bottom:10px;}
+  h2{font-family:var(--font-display); font-size:clamp(1.4rem,3.2vw,1.9rem); font-weight:600;}
+  .section-intro{color:var(--text-muted); max-width:64ch; margin-top:12px; font-size:14.5px;}
+
+  .scale-strip{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:32px;}
+  .scale-card{border:1px solid var(--border); border-radius:10px; padding:18px; background:var(--panel);}
+  .scale-card b{display:block; font-family:var(--font-display); font-size:24px; color:var(--amber);}
+  .scale-card span{font-family:var(--font-mono); font-size:12px; color:var(--text-muted);}
+
+  .trace{margin-top:36px; position:relative;}
+  .trace::before{content:""; position:absolute; left:19px; top:6px; bottom:6px; width:1px; background:linear-gradient(var(--border), var(--border) 90%, transparent);}
+  .hop{position:relative; padding-left:56px; margin-bottom:34px;}
+  .hop:last-child{margin-bottom:0;}
+  .hop-index{position:absolute; left:0; top:0; width:38px; height:38px; border-radius:8px; background:var(--panel); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:13px; color:var(--teal);}
+  .hop.current .hop-index{border-color:var(--amber); color:var(--amber);}
+  .hop.current .hop-index::after{content:""; position:absolute; inset:-4px; border-radius:10px; border:1px solid var(--amber); opacity:.5; animation:ring 2.4s infinite;}
+  @keyframes ring{0%{transform:scale(.9);opacity:.6;}100%{transform:scale(1.3);opacity:0;}}
+  .hop-top{display:flex; flex-wrap:wrap; align-items:baseline; gap:10px; justify-content:space-between;}
+  .hop-role{font-family:var(--font-display); font-weight:600; font-size:16.5px;}
+  .hop-rtt{font-family:var(--font-mono); font-size:12.5px; color:var(--text-muted);}
+  .hop-rtt b{color:var(--teal);}
+  .hop-org{font-family:var(--font-mono); font-size:13px; color:var(--text-muted); margin-top:2px;}
+  .hop-desc{margin-top:10px; font-size:14px; color:var(--text-muted); max-width:58ch;}
+  .badge{display:inline-block; font-family:var(--font-mono); font-size:11px; color:var(--teal); border:1px solid var(--border); padding:2px 8px; border-radius:4px; margin-top:8px;}
+
+  .stack{display:grid; grid-template-columns:1fr; gap:14px; margin-top:34px;}
+  @media(min-width:680px){.stack{grid-template-columns:1fr 1fr;}}
+  .stack-card{background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:20px 22px;}
+  .stack-card .layer{font-family:var(--font-mono); font-size:11px; color:var(--amber); letter-spacing:.08em; text-transform:uppercase; margin-bottom:8px;}
+  .stack-card h3{font-family:var(--font-display); font-size:15.5px; font-weight:600; margin-bottom:8px;}
+  .stack-card p{color:var(--text-muted); font-size:13.5px;}
+
+  .proj-list{margin-top:34px; display:flex; flex-direction:column; gap:14px;}
+  .proj{border:1px solid var(--border); border-radius:8px; padding:16px 18px; background:var(--panel-2);}
+  .proj-tag{font-family:var(--font-mono); font-size:11px; color:var(--teal); text-transform:uppercase; letter-spacing:.06em;}
+  .proj p{margin-top:6px; font-size:14px; color:var(--text-muted);}
+
+  .cert-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; margin-top:34px;}
+  .cert{border:1px solid var(--border); border-radius:8px; padding:16px; font-family:var(--font-mono); font-size:13px; background:var(--panel-2);}
+  .cert .cert-tag{color:var(--teal); font-size:11px; display:block; margin-bottom:6px;}
+
+  .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:30px;}
+  .chip{font-family:var(--font-mono); font-size:12.5px; color:var(--text); border:1px solid var(--border); border-radius:100px; padding:8px 16px; background:var(--panel);}
+
+  .contact-card{margin-top:34px; border:1px solid var(--border); border-radius:12px; padding:30px; background:linear-gradient(180deg, var(--panel), var(--panel-2));}
+  .contact-row{display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--border); font-family:var(--font-mono); font-size:14px; flex-wrap:wrap; gap:6px;}
+  .contact-row:last-child{border-bottom:none;}
+  .contact-row span:first-child{color:var(--text-muted);}
+
+  footer{padding:32px 0 60px; text-align:center; font-family:var(--font-mono); font-size:12px; color:var(--text-muted);}
+</style>
+</head>
+<body>
+<div class="noise-bg"></div>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">ASP<span>://network-engineer</span></div>
+    <div class="navlinks">
+      <a href="#experience">experience</a>
+      <a href="#skills">stack</a>
+      <a href="#projects">projects</a>
+      <a href="#certs">certs</a>
+      <a href="#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="status-line"><span class="dot"></span> LINK STATE: UP — OPEN TO NETWORK ENGINEER ROLES</div>
+    <h1>Arun Sai Porandla<br><span class="accent">Network &amp; Infrastructure Specialist</span></h1>
+    <div class="role">Cisco Switching/Routing/WLC · AWS &amp; Azure Cloud Ops · Firewall Admin (Sophos/FortiGate) · Microsoft 365</div>
+    <p class="hero-desc">
+      9+ years of hands-on enterprise IT experience — networking, cloud infrastructure, system administration,
+      and SLA-driven incident management. I keep business-critical networks and servers running, secure, and documented.
+    </p>
+
+    <div class="hero-meta">
+      <div><b>9+ yrs</b>enterprise IT experience</div>
+      <div><b>1000+</b>users supported</div>
+      <div><b>100+</b>devices managed</div>
+    </div>
+
+    <div class="hero-cta">
+      <a class="btn primary" href="#contact">Establish contact</a>
+      <a class="btn" href="#experience">View route history</a>
+    </div>
+  </div>
+</header>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="eyebrow">traceroute --career</div>
+    <h2>Route to here: 3 hops, 9+ years</h2>
+    <p class="section-intro">Each hop is a role — read top to bottom, oldest to most recent.</p>
+
+    <div class="trace">
+      <div class="hop">
+        <div class="hop-index">1</div>
+        <div class="hop-top">
+          <div class="hop-role">System Administrator</div>
+          <div class="hop-rtt">rtt <b>Jun 2016 – Aug 2018</b></div>
+        </div>
+        <div class="hop-org">Macro Tech</div>
+        <div class="hop-desc">First hop into enterprise IT — infrastructure and system administration fundamentals.</div>
+      </div>
+
+      <div class="hop">
+        <div class="hop-index">2</div>
+        <div class="hop-top">
+          <div class="hop-role">Sr. System Administrator</div>
+          <div class="hop-rtt">rtt <b>Sept 2018 – Jul 2019</b></div>
+        </div>
+        <div class="hop-org">Vimbri Media Pvt Ltd</div>
+        <div class="hop-desc">Greater ownership of system administration and infrastructure operations.</div>
+      </div>
+
+      <div class="hop current">
+        <div class="hop-index">3</div>
+        <div class="hop-top">
+          <div class="hop-role">Technical Specialist</div>
+          <div class="hop-rtt">rtt <b>Jul 2019 – present</b></div>
+        </div>
+        <div class="hop-org">Zensar Technologies (previously M3BI)</div>
+        <div class="hop-desc">
+          Supporting 1000+ enterprise users across networking, Microsoft 365, and Windows Server environments.
+          Managing routers, switches, wireless controllers, and firewalls across multiple business locations —
+          VLAN segmentation, VPN connectivity, root-cause analysis, and SLA-compliant incident resolution.
+          Administering AWS/Azure cloud resources, Active Directory, Hyper-V, and Microsoft 365 (Exchange, SharePoint, Teams).
+        </div>
+        <span class="badge">ACTIVE — 6+ years and counting</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="eyebrow">show stack</div>
+    <h2>What I work with</h2>
+    <p class="section-intro">Grouped the way a network engineer thinks about it — from edge security down to the systems underneath.</p>
+
+    <div class="stack">
+      <div class="stack-card">
+        <div class="layer">Networking</div>
+        <h3>Cisco Switching, Routing &amp; Wireless</h3>
+        <p>VLAN configuration &amp; troubleshooting, VPN support, Cisco WLC, Cisco Meraki dashboard monitoring, LAN/WAN, TCP/IP, DNS, DHCP, NAT, Layer 2/3 troubleshooting, Cisco ISE exposure.</p>
+      </div>
+      <div class="stack-card">
+        <div class="layer">Cloud &amp; Infrastructure</div>
+        <h3>AWS, Azure &amp; Server Admin</h3>
+        <p>AWS EC2/S3/IAM/VPC, Azure VMs &amp; storage, Windows Server &amp; Linux administration, Active Directory, Hyper-V virtualization, server patching &amp; upgrades.</p>
+      </div>
+      <div class="stack-card">
+        <div class="layer">Security &amp; Compliance</div>
+        <h3>Firewalls, Endpoint &amp; Access</h3>
+        <p>Firewall administration on FMC, Sophos &amp; FortiGate; endpoint security, antivirus/EDR, vulnerability remediation, access management, compliance monitoring.</p>
+      </div>
+      <div class="stack-card">
+        <div class="layer">Microsoft 365</div>
+        <h3>Collaboration Platforms</h3>
+        <p>Microsoft 365 administration, Exchange Online, SharePoint Online, Microsoft Teams, Power Platform, Group Policy management.</p>
+      </div>
+      <div class="stack-card">
+        <div class="layer">Operations</div>
+        <h3>ITIL, Tools &amp; Automation</h3>
+        <p>Incident, service request &amp; change management under ITIL; ManageEngine, Atera, Git, ticketing systems, basic PowerShell scripting, asset management.</p>
+      </div>
+      <div class="stack-card">
+        <div class="layer">Collaboration</div>
+        <h3>Cross-Team &amp; Vendor Support</h3>
+        <p>Cross-team coordination, third-party/vendor engagement, and end-user technical support across enterprise environments.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="eyebrow">show projects</div>
+    <h2>Infrastructure &amp; network projects</h2>
+
+    <div class="proj-list">
+      <div class="proj">
+        <div class="proj-tag">Wireless</div>
+        <p>Implemented and managed Cisco WLC configurations — SSID creation, AP onboarding, wireless policy management, and enterprise wireless troubleshooting.</p>
+      </div>
+      <div class="proj">
+        <div class="proj-tag">Layer 3</div>
+        <p>Supported Layer 3 implementation including VLAN segmentation, inter-VLAN routing, IP addressing, and enterprise network optimization across business environments.</p>
+      </div>
+      <div class="proj">
+        <div class="proj-tag">Security</div>
+        <p>Configured firewall policies, NAT rules, VPN tunnels, and security access controls in Sophos and FortiGate environments to strengthen network security and remote connectivity.</p>
+      </div>
+      <div class="proj">
+        <div class="proj-tag">Migration</div>
+        <p>Participated in infrastructure enhancement and migration activities — switch configuration, wireless optimization, and firewall rule implementation — with minimal business disruption.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certs">
+  <div class="wrap">
+    <div class="eyebrow">show certifications</div>
+    <h2>Certifications &amp; education</h2>
+
+    <div class="cert-grid">
+      <div class="cert"><span class="cert-tag">CISCO</span>CCNA</div>
+      <div class="cert"><span class="cert-tag">CISCO NET ACADEMY</span>Intro to Cybersecurity</div>
+      <div class="cert"><span class="cert-tag">MICROSOFT</span>MTA — Networking Fundamentals</div>
+      <div class="cert"><span class="cert-tag">MICROSOFT</span>MTA — Windows Server Admin Fundamentals</div>
+      <div class="cert"><span class="cert-tag">MICROSOFT</span>MTA — Windows OS Fundamentals</div>
+      <div class="cert"><span class="cert-tag">MICROSOFT</span>MCP</div>
+      <div class="cert"><span class="cert-tag">EDUCATION</span>B.Tech (EEE), JNT University, Telangana</div>
+    </div>
+
+    <div class="chips">
+      <div class="chip">Strong analytical &amp; troubleshooting skills</div>
+      <div class="chip">SLA-driven incident management</div>
+      <div class="chip">Cross-team collaboration</div>
+      <div class="chip">Adapts fast to emerging tech</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="eyebrow">interface status</div>
+    <h2>Let's connect</h2>
+    <p class="section-intro">Open to Network Engineer opportunities in Hyderabad. Reach out through any interface below.</p>
+
+    <div class="contact-card">
+      <div class="contact-row"><span>email</span><a href="mailto:porandla.arun9@gmail.com">porandla.arun9@gmail.com</a></div>
+      <div class="contact-row"><span>phone</span><span>+91 8500166773</span></div>
+      <div class="contact-row"><span>location</span><span>Hyderabad, Telangana, IN</span></div>
+      <div class="contact-row"><span>linkedin</span><a href="#" target="_blank" rel="noopener">linkedin.com/in/your-handle</a></div>
+      <div class="contact-row"><span>github</span><a href="#" target="_blank" rel="noopener">github.com/your-handle</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    &copy; <span id="year"></span> Arun Sai Porandla — built on a network metaphor, deployed on GitHub Pages.
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
